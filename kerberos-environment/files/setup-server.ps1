@@ -31,7 +31,7 @@ Write-Host "Preparing $domain_path users..."
 try {
    Get-ADDomain -Current LocalComputer
    Write-Output "AD running"
- } 
+ }
  catch {
    Write-Output "AD not running, sleeping for 60 seconds.."
    start-sleep -Seconds 60
@@ -41,7 +41,7 @@ try {
  try {
    Get-ADDomain -Current LocalComputer
    Write-Output "AD running"
- } 
+ }
  catch {
    Write-Output "AD not running, sleeping for 60 seconds.."
    start-sleep -Seconds 60
@@ -70,7 +70,7 @@ Write-Host  "Successfully added KERBEROS_TEST_USERNAME : [${KERBEROS_TEST_USERNA
 $REALM="${DOMAIN}.${HOSTED_ZONE}".ToUpper()
 $NETBIOSNAME = "${DOMAIN}".ToUpper()
 
-ktpass -princ HTTP/$FQDN@<$REALM> -pass ${KERBEROS_ADMIN_PASSWORD} -mapuser $NETBIOSNAME\${KERBEROS_ADMIN_USERNAME} -crypto all -ptype KRB5_NT_PRINCIPAL -out c:\httpkerberos.keytab -kvno 0
+ktpass -princ HTTP/$FQDN@$REALM -pass ${KERBEROS_ADMIN_PASSWORD} -mapuser $NETBIOSNAME\${KERBEROS_ADMIN_USERNAME} -crypto all -ptype KRB5_NT_PRINCIPAL -out c:\httpkerberos.keytab -kvno 0
 setspn -a HTTP/$FQDN ${KERBEROS_ADMIN_USERNAME}
 
 netsh interface ip set dns "Ethernet" static "127.0.0.1"
