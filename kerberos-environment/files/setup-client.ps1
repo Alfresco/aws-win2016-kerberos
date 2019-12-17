@@ -36,7 +36,7 @@ gpupdate /force
 # we also need to specify the wildcard of the Kerberos delegation server whitelist  (step 8. from docs above)
 New-Item -Path "HKLM:\Software\Policies\Google"
 New-Item -Path "HKLM:\Software\Policies\Google\Chrome"
-$VALUES = "*" + $FQDN.Substring($FQDN.IndexOf(".")) + "," + $FQDN
+$VALUES = "*" + "${FQDN}".Substring("${FQDN}".IndexOf(".")) + "," + "${FQDN}"
 New-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -PropertyType String  -Name AuthNegotiateDelegateWhitelist -Value "$VALUES"
 New-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -PropertyType String  -Name AuthServerWhitelist -Value "$VALUES"
 Write-Host  "DONE: applying Chrome Group Policy for Kerberos authentication"
@@ -52,7 +52,7 @@ Write-Host  "DONE: chromedriver installation"
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 # install tools
-choco install jdk11 --force -y -and choco install git --force -y -and choco install maven --force -y
+choco install jdk8 --force -y -and choco install git --force -y -and choco install maven --force -y
 
 # add computer in domain
 $password = "${SERVER_ADMIN_PASSWORD}" | ConvertTo-SecureString -asPlainText -Force

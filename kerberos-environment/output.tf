@@ -1,5 +1,5 @@
 output "kerberos-domain" {
-  value = "${aws_route53_record.domain.name}"
+  value = "${var.DOMAIN}.${var.HOSTED_ZONE}"
 }
 
 output "kerberos-server-public-ip" {
