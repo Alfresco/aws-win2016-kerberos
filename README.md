@@ -53,6 +53,8 @@ $ make start-server AMI_ID=<use-the-id-of-the-AMI-created-previous>
 #### c) start the Kerberos Client
 > this will start the Windows client machine that will be added in domain, in the server that we started on the previous step
 
+`NOTE`: that this will take like ~5-10 minutes to complete the execution of User Data scripts
+
 > follow [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/retrieve-windows-admin-password/) to retrieve administrator's password to login remotely
 
 ```
